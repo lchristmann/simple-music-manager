@@ -9,6 +9,7 @@ use App\Models\Piece;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -63,15 +64,23 @@ class DatabaseSeeder extends Seeder
             );
 
         foreach ($instruments as $instrument) {
-            $collections = Collection::factory(2)->create([
-                'user_id' => $user->id,
-                'instrument_id' => $instrument->id,
-            ]);
+            $collections = Collection::factory()
+                ->count(2)
+                ->sequence(fn (Sequence $sequence) => [
+                    'user_id' => $user->id,
+                    'instrument_id' => $instrument->id,
+                    'sort' => $sequence->index, // 0, 1, ...
+                ])
+                ->create();
 
             foreach ($collections as $collection) {
-                Piece::factory(5)->create([
-                    'collection_id' => $collection->id,
-                ]);
+                Piece::factory()
+                    ->count(5)
+                    ->sequence(fn (Sequence $sequence) => [
+                        'collection_id' => $collection->id,
+                        'sort' => $sequence->index,
+                    ])
+                    ->create();
             }
         }
 

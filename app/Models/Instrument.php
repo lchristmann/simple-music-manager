@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 #[ScopedBy([OwnedByUserScope::class])]
 class Instrument extends Model
@@ -34,11 +35,14 @@ class Instrument extends Model
     protected static function booted(): void
     {
         static::creating(function (Instrument $instrument) {
-            // Set initial sort value to the MAX(sort) + 1 (if it hasn't been set already)
-            $instrument->sort ??= static::where('user_id', $instrument->user_id)->max('sort') + 1;
-            // this also works with no instruments existing (because "null + 1" is "1")
+            // auth check, because we don't want this to run during seeding (where there's no logged-in user)
+            if (Auth::check()) {
+                $instrument->user_id = auth()->id();
 
-            $instrument->user_id = auth()->id();
+                // Set initial sort value to the MAX(sort) + 1
+                $instrument->sort = static::where('user_id', $instrument->user_id)->max('sort') + 1;
+                // this also works with no instruments existing (because "null + 1" is "1")
+            }
         });
     }
 }

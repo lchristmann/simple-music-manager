@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Collections;
 use App\Filament\Resources\Collections\Pages\CreateCollection;
 use App\Filament\Resources\Collections\Pages\EditCollection;
 use App\Filament\Resources\Collections\Pages\ListCollections;
+use App\Filament\Resources\Collections\RelationManagers\PiecesRelationManager;
 use App\Filament\Resources\Collections\Schemas\CollectionForm;
 use App\Filament\Resources\Collections\Tables\CollectionsTable;
 use App\Models\Collection;
@@ -50,7 +51,7 @@ class CollectionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PiecesRelationManager::class,
         ];
     }
 

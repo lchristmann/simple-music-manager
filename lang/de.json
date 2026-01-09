@@ -53,7 +53,14 @@
     "Email": "E-Mail",
     "Instrument": "Instrument",
     "Instruments": "Instrumente",
+    "Move down": "Nach unten",
+    "Move to another collection": "In anderen Ordner verschieben",
+    "Move up": "Nach oben",
+    "Piece": "Song",
+    "Pieces": "Songs",
+    "Target collection": "Zielordner",
     "Updated at": "Aktualisiert am",
     "User": "Benutzer",
-    "Users": "Benutzer"
+    "Users": "Benutzer",
+    "Notes": "Notizen"
 }

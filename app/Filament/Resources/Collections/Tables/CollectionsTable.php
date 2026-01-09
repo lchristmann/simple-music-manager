@@ -31,7 +31,7 @@ class CollectionsTable
                     ->icon('heroicon-o-chevron-up')
                     ->label(false)
                     ->action(fn (Collection $record) => self::moveUp($record))
-                    ->tooltip('Move up')
+                    ->tooltip(__('Move up'))
                     ->disabled(fn (Collection $record) =>
                         $record->sort === Collection::where('user_id', $record->user_id)
                             ->where('instrument_id', $record->instrument_id)
@@ -41,7 +41,7 @@ class CollectionsTable
                     ->icon('heroicon-o-chevron-down')
                     ->label(false)
                     ->action(fn (Collection $record) => self::moveDown($record))
-                    ->tooltip('Move down')
+                    ->tooltip(__('Move down'))
                     ->disabled(fn (Collection $record) =>
                         $record->sort === Collection::where('user_id', $record->user_id)
                             ->where('instrument_id', $record->instrument_id)

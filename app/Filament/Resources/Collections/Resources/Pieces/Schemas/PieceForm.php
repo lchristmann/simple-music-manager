@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Collections\Resources\Pieces\Schemas;
 
-use App\Enums\CompilationStatus;
+use App\Enums\PlayableStatus;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -20,8 +20,8 @@ class PieceForm
                 TextInput::make('tutorial_link')->label(__('Tutorial Link')),
                 Select::make('status')
                     ->label(__('Status'))
-                    ->options(CompilationStatus::options())
-                    ->default(CompilationStatus::NOT_PLAYABLE_YET->value)
+                    ->options(PlayableStatus::options())
+                    ->default(PlayableStatus::NOT_PLAYABLE_YET->value)
                     ->selectablePlaceholder(false)
                     ->required(),
                 Textarea::make('notes')->label(__('Notes'))->columnSpanFull(),

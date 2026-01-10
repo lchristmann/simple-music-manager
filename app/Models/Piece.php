@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\CompilationStatus;
+use App\Enums\PlayableStatus;
 use App\Models\Scopes\OwnedByUserViaCollectionScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,12 +29,12 @@ class Piece extends Model
     ];
 
     protected $casts = [
-        'status' => CompilationStatus::class,
+        'status' => PlayableStatus::class,
     ];
 
     public function isPlayable(): bool
     {
-        return $this->status === CompilationStatus::PLAYABLE;
+        return $this->status === PlayableStatus::PLAYABLE;
     }
 
     public function collection(): BelongsTo

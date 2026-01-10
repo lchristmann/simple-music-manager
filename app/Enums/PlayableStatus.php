@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum CompilationStatus: string
+enum PlayableStatus: string
 {
     case PLAYABLE = 'playable';
     case WORKING_ON_IT = 'workingOnIt';

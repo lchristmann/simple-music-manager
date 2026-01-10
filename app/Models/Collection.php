@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\CompilationStatus;
+use App\Enums\PlayableStatus;
 use App\Models\Scopes\OwnedByUserScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,7 +47,7 @@ class Collection extends Model
             return 0;
         }
 
-        $playable = $this->pieces()->where('status', CompilationStatus::PLAYABLE)->count();
+        $playable = $this->pieces()->where('status', PlayableStatus::PLAYABLE)->count();
 
         return round(($playable / $total) * 100);
     }

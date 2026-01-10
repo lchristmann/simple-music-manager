@@ -32,6 +32,12 @@ The app uses:
 - [Filament](https://filamentphp.com/) 4 for the backend
 - [Livewire](https://livewire.laravel.com/) 3, [Flux UI](https://fluxui.dev/) 2 and  [Tailwind CSS](https://tailwindcss.com/) 4 for the frontend
 
+## Data Model
+
+The below database diagram shows the data model of the application.
+
+![Entity Relationship Diagram](docs/diagrams/db-schema.drawio.svg)
+
 ## Maintenance
 
 This project is actively maintained by [me](https://github.com/lchristmann).

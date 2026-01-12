@@ -5,9 +5,14 @@
             <flux:heading size="xl" level="1">
                 {{ $piece->name }}
             </flux:heading>
-            <flux:text class="mb-6 mt-2 text-base">
+            <flux:text class="mt-2 text-base">
                 {{ $piece->artist ?? 'Unknown Artist' }}
             </flux:text>
+            @if($piece->arranged_by)
+                <flux:text class="mb-6 mt-1 text-base">
+                    {{ __('Arr.: ') . $piece->arranged_by }}
+                </flux:text>
+            @endif
         </div>
 
         {{-- Edit Button --}}
@@ -20,11 +25,22 @@
     <div class="space-y-4">
         {{-- Status --}}
         <livewire:components.badges.playable-status-badge :status="$piece->status"/>
+        <livewire:components.badges.difficulty-badge :level="$piece->difficulty" />
+
+        {{-- Sheet Music / Tab --}}
+        @if($piece->sheet_music_link)
+            <flux:text class="font-medium">
+                {{ __('Sheet Music') . ' / ' . __('Tab') . ':' }}
+                <flux:link href="{{ $piece->sheet_music_link }}" external>
+                    {{ $piece->sheet_music_link }}
+                </flux:link>
+            </flux:text>
+        @endif
 
         {{-- Lyrics --}}
         @if($piece->lyrics_link)
             <flux:text class="font-medium">
-                Lyrics:
+                {{ __('Lyrics') . ':' }}
                 <flux:link href="{{ $piece->lyrics_link }}" external>
                     {{ $piece->lyrics_link }}
                 </flux:link>
@@ -34,7 +50,7 @@
         {{-- Tutorial --}}
         @if($piece->tutorial_link)
             <flux:text class="font-medium">
-                Tutorial:
+                {{ __('Tutorial') . ':' }}
                 <flux:link href="{{ $piece->tutorial_link }}" external>
                     {{ $piece->tutorial_link }}
                 </flux:link>

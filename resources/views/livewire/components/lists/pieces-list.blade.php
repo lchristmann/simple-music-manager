@@ -30,7 +30,10 @@
                     @endif
                 </div>
 
-                <livewire:components.badges.playable-status-badge :status="$piece->status" />
+                <div>
+                    <livewire:components.badges.playable-status-badge :status="$piece->status" />
+                    <livewire:components.badges.difficulty-badge :level="$piece->difficulty" />
+                </div>
             </a>
         </li>
     @empty

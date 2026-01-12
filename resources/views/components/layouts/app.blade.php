@@ -19,6 +19,7 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" href="{{ route('home') }}">{{ __('Home') }}</flux:sidebar.item>
+            <flux:sidebar.item icon="fire" href="{{ route('practice') }}">{{ __('Practice') }}</flux:sidebar.item>
             @foreach(\App\Models\Instrument::with(['collections' => fn ($q) => $q->withCount('pieces'),])->orderBy('sort')->get()
                 as $instrument)
                 <flux:sidebar.group expandable icon="folder" heading="{{ __($instrument->name) }}" class="grid">

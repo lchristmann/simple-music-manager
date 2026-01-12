@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Collections\Resources\Pieces\Tables;
 
+use App\Enums\DifficultyLevel;
 use App\Enums\PlayableStatus;
 use App\Models\Collection;
 use App\Models\Piece;
@@ -24,18 +25,22 @@ class PiecesTable
             ->columns([
                 TextColumn::make('name')->label(__('Name'))->searchable(),
                 TextColumn::make('artist')->label(__('Artist'))->searchable(),
+                TextColumn::make('arranged_by')->label(__('Arr.'))->searchable(),
+                TextColumn::make('sheet_music_link')->label(__('Sheet Music'))
+                    ->formatStateUsing(fn (string $state): string =>
+                    preg_replace('#^https?://#', '', $state ?? ''),
+                    )
+                    ->limit(25),
                 TextColumn::make('lyrics_link')->label(__('Lyrics'))
                     ->formatStateUsing(fn (string $state): string =>
                             preg_replace('#^https?://#', '', $state ?? ''),
                         )
-                    ->limit(25)
-                    ->searchable(),
+                    ->limit(25),
                 TextColumn::make('tutorial_link')->label(__('Tutorial'))
                     ->formatStateUsing(fn (string $state): string =>
                     preg_replace('#^https?://#', '', $state ?? ''),
                     )
-                    ->limit(25)
-                    ->searchable(),
+                    ->limit(25),
                 TextColumn::make('status')
                     ->label(__('Status'))
                     ->badge()
@@ -44,6 +49,16 @@ class PiecesTable
                         PlayableStatus::PLAYABLE => 'success',
                         PlayableStatus::WORKING_ON_IT => 'warning',
                         PlayableStatus::NOT_PLAYABLE_YET => 'gray',
+                    })
+                    ->sortable(),
+                TextColumn::make('difficulty')
+                    ->label(__('Difficulty'))
+                    ->badge()
+                    ->formatStateUsing(fn (DifficultyLevel $state) => $state->label())
+                    ->color(fn (DifficultyLevel $state) => match ($state) {
+                        DifficultyLevel::EASY => 'info',
+                        DifficultyLevel::MEDIUM => 'warning',
+                        DifficultyLevel::HARD => 'danger',
                     })
                     ->sortable(),
                 TextColumn::make('created_at')->label(__('Created at'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),

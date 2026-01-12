@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DifficultyLevel;
 use App\Enums\PlayableStatus;
 use App\Models\Scopes\OwnedByUserViaCollectionScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -30,6 +31,7 @@ class Piece extends Model
 
     protected $casts = [
         'status' => PlayableStatus::class,
+        'difficulty' => DifficultyLevel::class,
     ];
 
     public function isPlayable(): bool

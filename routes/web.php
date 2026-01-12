@@ -5,11 +5,15 @@ use App\Livewire\Pages\CompilationPage;
 use App\Livewire\Pages\CompilationsPage;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\PiecePage;
+use App\Livewire\Pages\PracticePage;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', HomePage::class)
         ->name('home');
+
+    Route::get('/practice', PracticePage::class)
+        ->name('practice');
 
     Route::get('/collections/{collection}', CollectionPage::class)
         ->name('collections.show');

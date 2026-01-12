@@ -22,10 +22,13 @@ class Piece extends Model
         'collection_id',
         'name',
         'artist',
+        'arranged_by',
+        'sheet_music_link',
         'lyrics_link',
         'tutorial_link',
         'notes',
         'status',
+        'difficulty',
         'sort',
     ];
 
